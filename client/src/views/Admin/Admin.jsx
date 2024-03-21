@@ -21,11 +21,15 @@ const Admin = () => {
     fetchCategories();
   }, []);
 
+  const reload = () => {
+    window.location.reload(false);
+  };
+  
   const productsQuantity = products.length;
   const usersQuantity = users.length;
   const categoriesQuantity = categories.length;
 
-  const [productsPerPage] = useState(5);
+  const [productsPerPage] = useState(4);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = products?.slice(
@@ -72,6 +76,8 @@ const Admin = () => {
       const deleted = await axios.delete(`http://localhost:3000/delete/${id}`);
       if (deleted.status === 200) {
         getProducts();
+        setTimeout(reload, 1000);
+
       }
     } catch (error) {
       console.error("Error al eliminar el producto:", error);

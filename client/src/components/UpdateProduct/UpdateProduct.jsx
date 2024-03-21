@@ -63,18 +63,20 @@ const UpdateProduct = ({
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    const formErrors = validate(form);
-    if (Object.keys(formErrors).length > 0) {
-      console.log("Errores de validación:", formErrors);
-      return;
-    }
+    // const formErrors = validate(form);
+    // if (Object.keys(formErrors).length > 0) {
+    //   console.log("Errores de validación:", formErrors);
+    //   return;
+    // }
   
     try {
       await axios.put(`http://localhost:3000/edit/${product.id}`, form);
-      navigate("/admin");
-      setTimeout(reload, 1000);
+      // navigate("/admin");
+      
       setShowBackdrop(false);
       setShowUpdate(false);
+      navigate("/admin");
+      setTimeout(reload, 1000);
     } catch (error) {
       console.error("Error al actualizar el producto:", error);
     }
