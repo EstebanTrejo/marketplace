@@ -134,6 +134,7 @@ const Admin = () => {
       producto.categories.some((cat) => cat.name === categoria)
     ).length;
   };
+
   return (
     <>
       <div className={style.view}>
@@ -165,6 +166,7 @@ const Admin = () => {
           <table className={style.productTable}>
             <thead>
               <tr>
+                <th></th>
                 <th>Nombre</th>
                 <th>Precio</th>
                 <th>Talles</th>
@@ -177,9 +179,10 @@ const Admin = () => {
               {Array.isArray(products) && products.length > 0 ? (
                 currentProducts?.map((product) => (
                   <tr key={product.id}>
+                    <td className={style.cartItem}><img src={`http://localhost:3000/img/${product.img}`} alt="img"/></td>
                     <td>{product.name}</td>
                     <td>${product.price}</td>
-                    <td>{product.sizes}</td>
+                    <td>{JSON.parse(product.sizes)}</td>
                     <td>{product.description}</td>
                     <td>
                       <button

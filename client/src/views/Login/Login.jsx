@@ -83,10 +83,10 @@ const Login = () => {
           />
           {errors.password && <p>{errors.password}</p>}
 
-          <div>
+          {/* <div>
             <input type="checkbox" name="rememberme" id="rememberme" />
             <label>Recordar mi sesión</label>
-          </div>
+          </div> */}
           <div>
             <button className={style.btn} type="submit">
               Ingresar
@@ -94,12 +94,15 @@ const Login = () => {
           </div>
         </form>
         <p>ó inicia sesión con:</p>
+        <div className={style.iconosInicio}>
+
         <a href="">
           <i className="fa-brands fa-google"></i>
         </a>
         <a href="">
           <i className="fa-brands fa-facebook"></i>
         </a>
+        </div>
         <p>
           Aún no tienes cuenta?{" "}
           <NavLink to="/register">Registrate Aquí</NavLink>

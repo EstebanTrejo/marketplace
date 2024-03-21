@@ -40,16 +40,20 @@ const UpdateProduct = ({
   }, [product]);
 
   const handleChange = (event) => {
-    const { name, value, type, checked } = event.target;
+    const { name, value, type, checked, files } = event.target;
+    const newValue =
+      type === "checkbox"
+        ? checked
+          ? [...form.sizes, value]
+          : form.sizes.filter((size) => size !== value)
+        : type === "file"
+        ? files[0]
+        : value;
     setForm((prevForm) => ({
       ...prevForm,
-      [name]:
-        type === "checkbox"
-          ? checked
-            ? [...prevForm.sizes, value]
-            : prevForm.sizes.filter((size) => size !== value)
-          : value,
+      [name]: newValue,
     }));
+    
     setErrors(validate({
       ...form,
       [event.target.name]: event.target.value,
@@ -58,24 +62,24 @@ const UpdateProduct = ({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     const formErrors = validate(form);
     if (Object.keys(formErrors).length > 0) {
-      setErrors(formErrors);
+      console.log("Errores de validación:", formErrors);
       return;
     }
-
+  
     try {
       await axios.put(`http://localhost:3000/edit/${product.id}`, form);
-      setShowBackdrop(false);
-      setShowUpdate(false);
       navigate("/admin");
       setTimeout(reload, 1000);
+      setShowBackdrop(false);
+      setShowUpdate(false);
     } catch (error) {
       console.error("Error al actualizar el producto:", error);
     }
   };
-
+  
   return (
     <div>
       <form className={style.formContainer} onSubmit={handleSubmit}>

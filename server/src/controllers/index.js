@@ -114,36 +114,28 @@ const controller = {
   putCreate: async (req, res) => {
     const { id } = req.params;
     const { name, description, price, sizes, quantity } = req.body;
-    // const sizes = req.body['sizes[]'];
-
+  
     try {
       const productToEdit = await db.Product.findByPk(id);
-
+  
       if (productToEdit) {
         productToEdit.name = name || productToEdit.name;
         productToEdit.description = description || productToEdit.description;
         productToEdit.price = price || productToEdit.price;
         productToEdit.quantity = quantity || productToEdit.quantity;
-
+  
         // Verificar si se cargó un nuevo archivo
         if (req.file && req.file.filename) {
           productToEdit.img = req.file.filename; // Asignar el nombre del archivo cargado
         }
-
+  
         // Verificar si sizes está definido y no es null
         if (sizes !== undefined && sizes !== null) {
-          // productToEdit.sizes = JSON.parse(sizes) || JSON.parse(productToEdit.sizes);
           productToEdit.sizes = sizes || productToEdit.sizes;
         }
-
-        // if (sizes && Array.isArray(sizes)) {
-        //   await productToEdit.setSizes([]); 
-        //   const newSizes = await db.Sizes.findAll({ where: { id: sizes } });
-        //   await productToEdit.addSizes(newSizes);
-        // }
-
+  
         await productToEdit.save();
-
+  
         res.redirect("/");
       } else {
         res.send("El producto no existe");
@@ -153,6 +145,7 @@ const controller = {
       res.status(500).send("Internal Server Error");
     }
   },
+  
 
   destroy: async (req, res) => {
     const { id } = req.params;

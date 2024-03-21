@@ -67,6 +67,14 @@
     font-weight: bold;
   }
 
+  .iconosInicio{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
   @media (max-width: 767px ){
     .formRegister {
       width: 90%;
