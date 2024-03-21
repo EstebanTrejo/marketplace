@@ -9,6 +9,8 @@ import Detail from "./views/Detail/Detail";
 import Login from "./views/Login/Login";
 import Register from "./views/Register/Register";
 import UserDashboard from "./views/UserDashboard/UserDashboard";
+import ShoppingCart from "./views/ShopppingCart/ShoppingCart";
+
 function App() {
   return (
     <>
@@ -20,6 +22,7 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/register" element={<Register/>}/>
         <Route path="/users/:id" element={<UserDashboard/>}/>
+        <Route path="/shoppingcart" element={<ShoppingCart/>}/>
       </Routes>
       <Footer />
     </>

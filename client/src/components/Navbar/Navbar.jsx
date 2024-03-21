@@ -44,7 +44,7 @@ const Navbar = () => {
                 />
               </svg>
             </NavLink>
-            <NavLink to="/cart">
+            <NavLink to="/shoppingcart">
               <svg
                 width="30"
                 height="30"
