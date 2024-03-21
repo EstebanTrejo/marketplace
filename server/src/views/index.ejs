@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/header.ejs") %>
+    <main>
+      <div class="sliderContainer">
+        <!-- Inicio slider -->
+        <div class="sliderFrame">
+          <ul>
+            <li>
+              <img src="img/slider1.jpg" alt="slider" />
+            </li>
+            <li>
+              <img src="img/slider2.jpg" alt="slider" />
+            </li>
+            <li>
+              <img src="img/slider3.jpg" alt="slider" />
+            </li>
+            <li>
+              <img src="img/slider4.jpg" alt="slider" />
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- Fin slider -->
+      <div class="mainCarrousel">
+        <div class="carrousel-list">
+          <div class="carrousel-track">
+            <% listProducts.forEach(product => { %>
+            <div class="carrousel">
+              <div>
+                <a href="/products/detail/<%= product.id %>">
+                  <img
+                    src="/img/<%= product.img %>"
+                    alt="<%= product.name %>"
+                  />
+                  <h4 style="text-transform: capitalize;"><%= product.name %></h4>
+                  <h6>$<%= product.price %></h6>
+                </a>
+
+                <a href="/edit/<%= product.id %>">
+                  <button class="buttonsIndex">Editar</button>
+                </a>
+
+                <button class="buttonsIndex" onclick="deleteProduct('<%= product.id %>')">Eliminar</button>
+              </div>
+
+            </div>
+            <% }) %>
+          </div>
+        </div>
+      </div>
+    </main>
+    <%- include("./partials/footer.ejs") %>
+  </body>
+</html>
+
+<script>
+  async function deleteProduct(productId) {
+    try {
+      const response = await fetch(`/delete/${productId}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        location.reload();
+      } else {
+        location.reload();
+        }
+    } catch (error) {
+      console.error('Error de red', error);
+    }
+  }
+</script>
+

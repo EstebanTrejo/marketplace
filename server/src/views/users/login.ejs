@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+
+
+  <body>
+    <%- include("../partials/header.ejs") %>
+
+    <main align="center" class="main-content">
+      <section class="form-register">
+        <p>INICIAR SESIÓN</p>
+        
+        <!-- errores -->
+
+        
+        <form method="POST" action="/users/login">
+          <input
+            class="ctrl"
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Email"
+          />
+          <!-- Mostrar errores específicos para el campo de email -->
+          <% if (locals.errors) { %>
+                <span class="error-msg2"><%= errors[0].msg %></span>
+          <% } %>
+          <input
+            class="ctrl"
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Contraseña"
+          />
+
+          <% if (locals.errors) { %>
+            <span class="error-msg2"><%= errors[1].msg %></span>
+          <% } %>
+
+          <div>
+            <input type="checkbox" name="rememberme" id="rememberme">
+            <label for="rememberme">Recordar mi sesión</label>
+          </div>
+          <div>
+            <button class="btn" type="submit">Ingresar</button>
+          </div>
+        </form>
+        <p>ó inicia sesión con:</p>
+        <a href="">
+          <i class="fa-brands fa-google"></i>
+        </a>
+        <a href="">
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+        <p>Aún no tienes cuenta? <a href="/register">Registrate Aquí</a></p>
+      </section>
+    </main>
+    <%- include("../partials/footer.ejs")  %>
+  </body>
+</html>

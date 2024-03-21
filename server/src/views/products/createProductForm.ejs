@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+
+  <body>
+    <%- include("../partials/header.ejs") %>
+
+    <main class="main-content">
+      <section class="form-register" >
+        <form action="/create" method="POST" enctype="multipart/form-data"> 
+          <p>Crear Producto</p>
+          <div>
+            <input
+              class="ctrl"
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Nombre del producto"
+              value="<%= locals.old && old.name ? old.name : '' %>"
+            />
+            <!-- Mostrar errores específicos para el campo nombre -->
+          <% if (locals.errors) { %>
+            <span class="error-msg2"><%= errors[0].msg %></span>
+          <% } %>
+          </div>
+          <div>
+            <input
+              type="text"
+              class="ctrl"
+              name="description"
+              id="description"
+              placeholder="Descripción del producto"
+              value="<%= locals.old && old.descripcion ? old.descripcion : '' %>"
+            />
+              <!-- Mostrar errores específicos para el campo descripcion -->
+          <% if (locals.errors) { %>
+            <span class="error-msg2"><%= errors[2].msg %></span>
+          <% } %>
+          </div>
+          <div>
+            <input
+              class="ctrl"
+              type="number"
+              name="price"
+              id="price"
+              min="1"
+              placeholder="Precio"
+              value="<%= locals.old && old.price ? old.price : '' %>"
+            />
+              <!-- Mostrar errores específicos para el campo precio -->
+          <% if (locals.errors) { %>
+            <span class="error-msg2"><%= errors[1].msg %></span>
+          <% } %>
+          </div>
+          <div>
+            <input
+              class="ctrl"
+              type="number"
+              name="quantity"
+              id="quantity"
+              min="1"
+              max="10"
+              placeholder="Cantidad"
+              value="<%= locals.old && old.quantity ? old.quantity : '' %>"
+            />
+              <!-- Mostrar errores específicos para el campo cantidad -->
+          <% if (locals.errors) { %>
+            <span class="error-msg2"><%= errors[3].msg %></span>
+          <% } %>
+          </div>
+          <div>
+            <label><input type="checkbox" name="sizes[]" value="S" <% if (locals.old && locals.old.sizes && locals.old.sizes.includes('S')) { %> checked <% } %>> S</label>
+            <label><input type="checkbox" name="sizes[]" value="M" <% if (locals.old && locals.old.sizes && locals.old.sizes.includes('M')) { %> checked <% } %>> M</label>
+            <label><input type="checkbox" name="sizes[]" value="L" <% if (locals.old && locals.old.sizes && locals.old.sizes.includes('L')) { %> checked <% } %>> L</label>
+            <label><input type="checkbox" name="sizes[]" value="XL" <% if (locals.old && locals.old.sizes && locals.old.sizes.includes('XL')) { %> checked <% } %>> XL</label>
+
+              <!-- Mostrar errores específicos para el campo talles -->
+          <% if (locals.errors) { %>
+            <span class="error-msg2"><%= errors[4].msg %></span>
+          <% } %>
+          </div>
+          
+          <div class="imgProduct">
+            <p>Imagen:</p>
+            <input type="file" name="img" id="img"/>
+          </div>
+              <!-- Mostrar errores específicos para el campo nombre -->
+          <% if (locals.errors) { %>
+            <span class="error-msg2"><%= errors[5].msg %></span>
+          <% } %>
+
+          <div class="btnForm">
+            <button type="reset">Borrar</button>
+            <button type="submit">Crear</button>
+          </div>
+
+        </form>
+      </section>
+    </main>
+    <%- include("../partials/footer.ejs") %>
+  </body>
+</html>
